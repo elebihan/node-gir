@@ -180,6 +180,10 @@ bool Args::ToGType(Handle<Value> v, GIArgument *arg, GIArgInfo *info, GITypeInfo
             g_value_unset(&gvalue);
             return true;
         }
+        if (g_type_is_a(gtype, G_TYPE_ENUM)) {
+                arg->v_long = v->ToUint32()->Value();
+                return true;
+        }
     }
     
     return false;
